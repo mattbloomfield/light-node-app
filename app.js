@@ -3,13 +3,14 @@ const app = express()
 const path = require('path');
 
 const relativeFilePath = process.argv[2];
+const port = process.argv[3] || 3000;
 
 if (!relativeFilePath) {
     console.log('No relative filepath given. Did you forget to add it as an argument?');
     console.log('Expected:');
-    console.log('$ node app.js ../my-static-files/path/to/index.html');
+    console.log('$ node app.js ../path/to/index.html [port]');
     console.log('or if using pm2');
-    console.log('$ pm2 start app.js -- ../leaders-and-laggards-rebuild/public/index.html');
+    console.log('$ pm2 start app.js -- ../path/to/index.html [port]');
     console.log('');
     console.log('Serving JSON instead');
     console.log('');
@@ -25,4 +26,4 @@ if (!relativeFilePath) {
     app.get('/', (req, res) => res.sendFile(staticIndex));
 }
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+app.listen(port, () => console.log(`Example app listening on port ${port}!`))
