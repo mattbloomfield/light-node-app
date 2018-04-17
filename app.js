@@ -2,8 +2,13 @@ const express = require('express')
 const app = express()
 const path = require('path');
 
-const relativeFilePath = process.argv[2];
-const port = process.argv[3] || 3000;
+let relativeFilePath = process.argv[2];
+let port = process.argv[3] || 3000;
+
+if (parseInt(relativeFilePath) > 0 && !process.argv[3]) {
+    port = relativeFilePath;
+    relativeFilePath = null;
+}
 
 if (!relativeFilePath) {
     console.log('No relative filepath given. Did you forget to add it as an argument?');
